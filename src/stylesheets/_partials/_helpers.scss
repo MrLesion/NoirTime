@@ -1,0 +1,100 @@
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.hide {
+    display: none!important;
+}
+
+.show {
+    display: block!important;
+}
+
+.p-r-0 {
+    padding-right: 0!important;
+}
+
+.m-0 {
+    margin: 0!important;
+}
+
+.m-t-1 {
+    margin-top: 1em!important;
+}
+
+.m-t-2 {
+    margin-top: 2em!important;
+}
+
+.m-b-1 {
+    margin-bottom: 1em!important;
+}
+
+
+.is-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.justify-space-between {
+    justify-content: space-between;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.blink {
+    animation: blink-animation .7s steps(5, start) infinite;
+}
+
+@keyframes blink-animation {
+    to {
+        visibility: hidden;
+    }
+}
+
+.error-bg {
+    background: $error-color!important;
+    border-color: darken($error-color, 10%)!important;
+    color: lighten($error-color, 20%)!important;
+    *{
+        color: lighten($error-color, 20%)!important;
+    }
+}
+
+.success-bg {
+    background: $success-color!important;
+    border-color: darken($success-color, 10%)!important;
+}
+
+.warning-bg {
+    background: $warning-color!important;
+    border-color: darken($warning-color, 10%)!important;
+}
+
+.info-bg {
+    background: $info-color!important;
+    border-color: darken($info-color, 10%)!important;
+}
+
+.error-text {
+    color: $error-color!important;
+}
+
+.success-text {
+    color: $success-color!important;
+}
+
+.info-text {
+    color: $info-color!important;
+}

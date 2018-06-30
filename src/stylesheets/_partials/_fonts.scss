@@ -1,0 +1,35 @@
+
+@font-face {
+  font-family: 'SourceSans Regular';
+  font-style: normal;
+  font-weight: 500;
+  src: url(../../src/fonts/SourceSansPro-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'SourceSans Bold';
+  font-style: normal;
+  font-weight: 800;
+  src: url(../../src/fonts/SourceSansPro-Bold.ttf);
+}
+
+@font-face {
+  font-family: 'SourceSans Light';
+  font-style: normal;
+  font-weight: 300;
+  src: url(../../src/fonts/SourceSansPro-Light.ttf);
+}
+
+
+h1,h2,h3{
+	font-family: $light-font;
+	margin: 0;
+}
+
+b,strong{
+	font-family: $bold-font;
+}
+
+small{
+	font-family: $light-font;
+}

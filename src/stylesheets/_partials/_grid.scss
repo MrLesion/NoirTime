@@ -1,0 +1,208 @@
+.container {
+    //margin: 1em;
+    padding: 1em;
+}
+
+.col {
+    padding: 0 $h-padding;
+}
+
+.row .row {
+    margin: 0 (-$h-padding);
+}
+
+.row:before,
+.row:after {
+    content: "";
+    display: table;
+}
+
+.row:after {
+    clear: both;
+}
+
+@media only screen {
+    .col {
+        float: left;
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 30em) {
+    .col12 {
+        width: 100%;
+    }
+    .col8 {
+        width: 66.66%;
+    }
+    .col6 {
+        width: 50%;
+    }
+    .col4 {
+        width: 33.33%;
+    }
+    .col3 {
+        width: 25%;
+    }
+}
+
+.filter-row {
+    padding: .5em;
+    background: $primary-color;
+    border-radius: 1em;
+    border-top: 3px solid $alternative-color;
+    border-bottom: 3px solid $alternative-color;
+    box-shadow: -1px 0 0px rgba($alternative-color,1), 1px 0 0px rgba($alternative-color,1);
+    input[type="search"] {
+        width: 100%;
+        padding: 1.2em;
+        line-height: 1em;
+        border: 0;
+        background: rgba($white, .5);
+        outline: 1px solid $alternative-color;
+        &:focus {
+            outline-offset: 1px;
+            box-shadow: 0 0 5px rgba($info-color,.5);
+        }
+    }
+}
+
+.no-result-row {
+    background: $white;
+    text-align: center;
+    color: $error-color;
+    font-family: $light-font;
+    font-size: 2em;
+}
+
+.task-row {
+
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid $alternative-color;
+    box-shadow: -1px 0 0px rgba($alternative-color,1), 1px 0 0px rgba($alternative-color,1);
+    overflow: hidden;
+    background: $primary-color;
+    transition: all .3s ease;
+    opacity: 1;
+    &.focus {
+        box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+        z-index: 2;
+        position: relative;
+    }
+    &.disabled {
+        opacity: .5;
+        pointer-events: none;
+        cursor: not-allowed;
+    }
+    .inner-row {
+        position: relative;
+        padding: .5em;
+    }
+    .task-name {
+        display: block;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        transition: all .3s ease;
+        +.toggle-edit {
+            display: none;
+        }
+
+        &[contenteditable="true"] {
+            background-color: $white;
+            +.toggle-edit {
+                display: block;
+                position: absolute;
+                top: 8px;
+                right: 8px;
+                font-size: .85em;
+                padding: 2px 5px;
+                background: $success-color;
+                color: $white;
+            }
+        }
+    }
+    &:first-child {
+        border-top: 3px solid $alternative-color;
+        border-radius: 1em 1em 0 0;
+    }
+    &:last-child {
+        border-width: 3px;
+        border-radius: 0 0 1em 1em;
+    }
+    small {
+        color: darken($alternative-color, 20%);
+    }
+
+    .task-time {
+        font-size: 2em;
+        font-family: $light-font;
+    }
+    .task-actions {
+        justify-content: flex-end;
+        .task-action {
+            flex-direction: column;
+            position: relative;
+            .task-action-btn {
+                flex: 1;
+                width: 75px;
+                text-align: center;
+                padding: 1em;
+                line-height: 1.5em;
+                background: lighten($secondary-color, 20%);
+                border-left: 1px solid darken($secondary-color, 10%);
+                //text-shadow: 0px 1px 1px rgba(255, 255, 2555, 0.75), 0px -1px 1px rgba(0, 0, 0, .75);
+                font-family: $base-font;
+                text-transform: uppercase;
+                color: darken($grey, 10%);
+            }
+        }
+        .task-action-list {
+            position: absolute;
+            background: #f1f1f1;
+            width: 200%;
+            height: 100%;
+            right: -200%;
+
+            transition: all .3s ease;
+            &.open {
+                right: 0;
+            }
+            ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+                width: 50%;
+                float: left;
+                border-left: 1px solid $secondary-color;
+                li {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    flex-grow: 1;
+                    border-bottom: 1px solid $secondary-color;
+                    &:last-child {
+                        border-color: transparent;
+                    }
+                    font-size: .7em;
+                    color: darken($grey, 10%);
+                    a {
+                        color: darken($grey, 10%);
+                        text-align: center;
+                        padding: .2em;
+                        flex: 1;
+                    }
+                    label {
+                        padding: .2em;
+                        text-align: center;
+                        flex: 1;
+                    }
+                }
+            }
+        }
+    }
+}

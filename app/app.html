@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Noir Time</title>
+    <link href="stylesheets/main.css" rel="stylesheet" type="text/css">
+    <script src="helpers/context_menu.js"></script>
+    <script src="helpers/external_links.js"></script>
+    <script src="app.js"></script>
+</head>
+
+<body>
+    <header class="text-center m-b-1 m-t-2">
+        <h1 id="app-meta-name"></h1>
+        <small id="app-meta-description"></small>
+    </header>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col col12">
+                    <div class="row">
+                        <div class="col col12 d-flex justify-space-between align-items-center m-b-1">
+                            <h2>Tasks (<span data-bind="text:count"></span>)</h2>
+                            <small data-bind="text:date"></small>
+                        </div>
+                    </div>
+                    <div class="row filter-row is-sticky">
+                        <div class="col col12">
+                            <input type="search" class="filter-tasks" value="" placeholder="Filter / Create">
+                        </div>
+                    </div>
+                    <div class="row no-result-row" data-bind="visible: showNoResults">
+                        <div class="col col12">
+                            <p>No matches - Press enter to create</p>
+                        </div>
+                    </div>
+                    <div class="m-t-1" data-bind="template: { name: 'task-template', data: $data, foreach: tasks }"></div>
+                    <script type="text/html" id="task-template">
+                        <div class="row task-row" data-bind="attr: { id: id }">
+                            <div class="col col6">
+                                <div class="inner-row">
+                                    <strong class="task-name" data-bind="text: name">Internal</strong>
+                                    <a href="#" class="toggle-edit">Save</a>
+                                    <small class="task-over-time" data-bind="text: overall.formatted"></small>
+
+                                </div>
+                            </div>
+                            <div class="col col3">
+                                <div class="inner-row">
+                                    <strong class="task-time" data-bind="text: time.formatted"></strong>
+                                </div>
+                            </div>
+                            <div class="col col3 p-r-0">
+                                <div class="task-actions d-flex">
+                                    <div class="task-action d-flex">
+                                        <a href="#" class="task-action-btn success-bg task-start" data-bind="visible: observables.startBtn">Start</a>
+                                    </div>
+                                    <div class="task-action d-flex">
+                                        <a href="#" class="task-action-btn warning-bg task-pause" data-bind="visible: observables.pauseBtn">Stop</a>
+                                    </div>
+                                    <div class="task-action d-flex">
+                                        <a href="#" class="task-action-btn toggle-more">More</a>
+                                        <div class="task-action-list">
+                                            <ul>
+                                                <li class="error-bg" data-bind="visible: sticky === false">
+                                                    <a href="#" class=" task-delete">Delete</a>
+                                                </li>
+                                                <li data-bind="visible: observables.stopBtn">
+                                                    <a href="#" class="task-stop">Reset</a>
+                                                </li>
+                                                <li>
+                                                    <label>
+                                                        <input type="checkbox" name="isSticky" data-bind="checked: sticky" disabled> Is sticky
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li>
+                                                    <a href="#" class="toggle-edit">Edit</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="toggle-more">Close</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </script>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col col3">
+                    <strong>v.</strong><strong id="app-meta-version"></strong>
+                </div>
+                <div class="col col6 text-center">
+                    <strong id="app-meta-copyright"></strong>
+                </div>
+                <div class="col col3 text-right">
+                    <strong id="app-meta-web"></strong>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="background"></div>
+</body>
+
+</html>

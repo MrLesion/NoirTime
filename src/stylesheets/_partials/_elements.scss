@@ -1,0 +1,25 @@
+.task-btn {
+    border-radius: 50%;
+    border: 1px solid $alternative-color;
+    background: rgba($black, .2);
+    color: white;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0em;
+    font-size: .7em;
+    height: 2.5em;
+    width: 2.5em;
+    box-shadow: 0px 3px 5px rgba($black, .5);
+    &.task-btn-large {
+        font-size: .9em;
+        height: 4em;
+        width: 4em;
+    }
+    
+}
+
+
+.svg {
+    max-width: 100%;
+}
