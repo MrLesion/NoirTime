@@ -2,14 +2,15 @@
   "name": "noir-time",
   "productName": "Noir Time",
   "description": "The front-end time tracking app",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Mr. Lesion <lassehove@lesion.dk>",
   "copyright": "© 2018, lesion.dk",
   "homepage": "https://lesion.dk",
+  "repository": "https://github.com/MrLesion/NoirTime",
   "license": "MIT",
   "main": "app/background.js",
   "build": {
-    "appId": "com.example.electron-boilerplate",
+    "appId": "com.lesion.noir-time",
     "files": [
       "app/**/*",
       "node_modules/**/*",
@@ -43,6 +44,7 @@
     "electron": "^1.4.7",
     "electron-builder": "^8.6.0",
     "electron-mocha": "^3.0.0",
+    "electron-updater": "^3.0.3",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^5.0.0",
     "gulp-batch": "^1.0.5",
@@ -54,7 +56,6 @@
     "istanbul": "^0.4.3",
     "minimist": "^1.2.0",
     "mocha": "^3.0.2",
-    
     "rollup": "^0.36.3",
     "rollup-plugin-istanbul": "^1.1.0",
     "source-map-support": "^0.4.2",

@@ -37,7 +37,7 @@
                     </div>
                     <div class="m-t-1" data-bind="template: { name: 'task-template', data: $data, foreach: tasks }"></div>
                     <script type="text/html" id="task-template">
-                        <div class="row task-row" data-bind="attr: { id: id }">
+                        <div class="row task-row" data-bind="attr: { id: id, 'data-sort-order': index }" draggable="true">
                             <div class="col col6">
                                 <div class="inner-row">
                                     <strong class="task-name" data-bind="text: name">Internal</strong>
@@ -54,25 +54,29 @@
                             <div class="col col3 p-r-0">
                                 <div class="task-actions d-flex">
                                     <div class="task-action d-flex">
-                                        <a href="#" class="task-action-btn success-bg task-start" data-bind="visible: observables.startBtn">Start</a>
+                                        <a href="#" class="task-action-btn success-bg task-start" data-bind="visible: observables.startBtn">
+                                            <img src="./images/wall-clock.svg" alt="">
+                                        </a>
                                     </div>
                                     <div class="task-action d-flex">
-                                        <a href="#" class="task-action-btn warning-bg task-pause" data-bind="visible: observables.pauseBtn">Stop</a>
+                                        <a href="#" class="task-action-btn warning-bg task-pause" data-bind="visible: observables.pauseBtn">
+                                            <img src="./images/round-done-button.svg" alt="">
+                                        </a>
                                     </div>
                                     <div class="task-action d-flex">
-                                        <a href="#" class="task-action-btn toggle-more">More</a>
+                                        <a href="#" class="task-action-btn toggle-more">
+                                            <img src="./images/round-left-button.svg" alt="">
+                                        </a>
                                         <div class="task-action-list">
                                             <ul>
                                                 <li class="error-bg" data-bind="visible: sticky === false">
                                                     <a href="#" class=" task-delete">Delete</a>
                                                 </li>
+                                                <li class="info-bg" data-bind="visible: sticky === true">
+                                                    <a>Sticky</a>
+                                                </li>
                                                 <li data-bind="visible: observables.stopBtn">
                                                     <a href="#" class="task-stop">Reset</a>
-                                                </li>
-                                                <li>
-                                                    <label>
-                                                        <input type="checkbox" name="isSticky" data-bind="checked: sticky" disabled> Is sticky
-                                                    </label>
                                                 </li>
                                             </ul>
                                             <ul>

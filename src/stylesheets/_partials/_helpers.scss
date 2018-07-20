@@ -85,6 +85,9 @@
 .info-bg {
     background: $info-color!important;
     border-color: darken($info-color, 10%)!important;
+    *{
+        color: darken($info-color, 20%)!important;
+    }
 }
 
 .error-text {

@@ -1,34 +1,27 @@
 import * as os from 'os'; // native node.js module
 import { remote } from 'electron'; // native electron module
+const jetpack = require('fs-jetpack'); // module loaded from npm
 import env from './env';
 import * as ko from 'knockout';
 import * as moment_ from 'moment';
 
-const jetpack = require('fs-jetpack');
 const moment = moment_;
-const app = remote.app;
-const appDir = jetpack.cwd(app.getAppPath());
+
+var app = remote.app;
+var appDir = jetpack.cwd(app.getAppPath());
 
 console.log('The author of this app is:', appDir.read('package.json', 'json').author);
-// wait for an updateReady message
-remote.ipcMain.on('updateReady', function(event, text) {
-  // changes the text of the button
-  var container = document.getElementById('app-meta-version');
-  container.innerHTML = "new version ready!";
-})
-
-
 
 module noirtime {
   export class Tasks {
-    interval: any = null;
-    filterResult: boolean = true;
-    currentTask = ko.observable('');
-    dragDomElm: HTMLElement = null;
-    time = {
-      clean: 0,
-      formatted: moment.utc(0).format('HH:mm:ss')
-    };
+    constructor() {
+      this.setMeta();
+      this.setupData();
+      this.bindEvents();
+    }
+
+    interval = null;
+    filterResult = true;
     viewModel = {
       tasks: ko.observableArray(),
       count: ko.observable(0),
@@ -44,11 +37,11 @@ module noirtime {
       }
     };
 
-    constructor() {
-      this.setMeta();
-      this.setupData();
-      this.bindEvents();
-    }
+    currentTask = ko.observable('');
+    time = {
+      clean: 0,
+      formatted: moment.utc(0).format('HH:mm:ss')
+    };
 
     setMeta() {
       document.getElementById('app-meta-name').innerText = appDir.read('package.json', 'json').productName;
@@ -58,6 +51,8 @@ module noirtime {
       document.getElementById('app-meta-web').innerText = appDir.read('package.json', 'json').homepage;
 
     }
+
+
     update(id: string, obj: any) {
       let taskID = 'noir.task-' + id;
       if (obj !== null) {
@@ -151,62 +146,13 @@ module noirtime {
         } else if ((<HTMLElement>e.target).className.indexOf('task-stop') > -1 || (<HTMLElement>e.target).parentElement.className.indexOf('task-stop') > -1) {
           _self.stopTimer(e);
         } else if ((<HTMLElement>e.target).className.indexOf('task-delete') > -1) {
-          //_self.deleteTask(e);
-          _self.popDialog('Delete task', 'Do you really want to delete this task?', _self.deleteTask, e);
+          _self.deleteTask(e);
         } else if ((<HTMLElement>e.target).className.indexOf('toggle-more') > -1 || (<HTMLElement>e.target).parentElement.className.indexOf('toggle-more') > -1) {
           _self.toggleMore(e);
         } else if ((<HTMLElement>e.target).className.indexOf('toggle-edit') > -1) {
           _self.editTask(e);
         }
       });
-      document.addEventListener('dragover', (e: Event) => {
-        if ((<HTMLElement>e.target).className.indexOf('task-row') > -1) {
-          _self.dragOver(e);
-        }
-      });
-
-      document.addEventListener('dragstart', (e: Event) => {
-        if ((<HTMLElement>e.target).className.indexOf('task-row') > -1) {
-          _self.dragStart(e);
-        }
-      });
-    }
-
-    popDialog(title: string, message: string, callback, event: Event) {
-      const _self = this;
-      remote.dialog.showMessageBox({
-        type: 'question',
-        buttons: ['Yes', 'No'],
-        title: title,
-        message: message,
-      }, function(response: number) {
-        callback(event, response, _self);
-      });
-    }
-
-    isBefore(el1, el2) {
-      if (el2.parentNode === el1.parentNode) {
-        for (var cur = el1.previousSibling; cur && cur.nodeType !== 9; cur = cur.previousSibling) {
-          if (cur === el2) {
-            return true;
-          }
-        }
-      }
-      return false;
-    }
-
-    dragOver(event: Event) {
-      if (this.isBefore(this.dragDomElm, (<HTMLElement>event.target))) {
-        (<HTMLElement>event.target).parentNode.insertBefore(this.dragDomElm, (<HTMLElement>event.target));
-      } else {
-        (<HTMLElement>event.target).parentNode.insertBefore(this.dragDomElm, (<HTMLElement>event.target).nextSibling);
-      }
-    }
-
-    dragStart(event: any) {
-      event.dataTransfer.effectAllowed = 'move';
-      event.dataTransfer.setData('text/plain', null);
-      this.dragDomElm = (<HTMLElement>event.target);
     }
 
     filterTasks(event: Event) {
@@ -251,7 +197,6 @@ module noirtime {
         this.update(taskRow.id, viewModelTask);
       } else {
         taskRow.querySelector('.task-name').setAttribute('contenteditable', 'true');
-        this.toggleMore(event);
       }
 
     }
@@ -288,18 +233,13 @@ module noirtime {
       (<HTMLInputElement>document.querySelector('.filter-tasks')).value = '';
       (<HTMLInputElement>document.querySelector('.filter-tasks')).dispatchEvent(new KeyboardEvent('keyup', { 'key': 'a' }));
     }
-    deleteTask(event: Event, response: number, _self) {
-      if (response === 0) {
-        const taskRow: Element = event.srcElement.closest('.task-row');
-        let taskIndex: String = _self.getTask(taskRow.id);
-        taskRow.remove();
-        let newCount: Number = _self.viewModel.count() - 1;
-        _self.viewModel.count(newCount);
-        _self.update(taskRow.id, null);
-      } else {
-        _self.toggleMore(event);
-      }
-
+    deleteTask(event: Event) {
+      const taskRow: Element = event.srcElement.closest('.task-row');
+      let taskIndex: String = this.getTask(taskRow.id);
+      taskRow.remove();
+      let newCount: Number = this.viewModel.count() - 1;
+      this.viewModel.count(newCount);
+      this.update(taskRow.id, null);
     }
     stopTimer(event: Event) {
       const taskRow: Element = event.srcElement.closest('.task-row');
@@ -318,9 +258,8 @@ module noirtime {
       viewModelTask.observables.pauseBtn(false);
 
       this.update(taskRow.id, viewModelTask);
-      this.toggleMore(event);
-      timerElement.innerHTML = '00:00:00';
 
+      timerElement.innerHTML = '00:00:00';
     }
     pauseTimer(event: Event) {
       let taskRows: HTMLCollectionOf<Element> = document.getElementsByClassName('task-row');

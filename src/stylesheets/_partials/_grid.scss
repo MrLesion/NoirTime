@@ -49,10 +49,10 @@
 .filter-row {
     padding: .5em;
     background: $primary-color;
-    border-radius: 1em;
+    border-radius: .5em;
     border-top: 3px solid $alternative-color;
     border-bottom: 3px solid $alternative-color;
-    box-shadow: -1px 0 0px rgba($alternative-color,1), 1px 0 0px rgba($alternative-color,1);
+    box-shadow: -1px 0 0px rgba($alternative-color, 1), 1px 0 0px rgba($alternative-color, 1);
     input[type="search"] {
         width: 100%;
         padding: 1.2em;
@@ -62,7 +62,7 @@
         outline: 1px solid $alternative-color;
         &:focus {
             outline-offset: 1px;
-            box-shadow: 0 0 5px rgba($info-color,.5);
+            box-shadow: 0 0 5px rgba($info-color, .5);
         }
     }
 }
@@ -80,7 +80,7 @@
     display: flex;
     align-items: center;
     border-bottom: 1px solid $alternative-color;
-    box-shadow: -1px 0 0px rgba($alternative-color,1), 1px 0 0px rgba($alternative-color,1);
+    box-shadow: -1px 0 0px rgba($alternative-color, 1), 1px 0 0px rgba($alternative-color, 1);
     overflow: hidden;
     background: $primary-color;
     transition: all .3s ease;
@@ -125,11 +125,15 @@
     }
     &:first-child {
         border-top: 3px solid $alternative-color;
-        border-radius: 1em 1em 0 0;
+        border-radius: .5em .5em 0 0;
     }
     &:last-child {
         border-width: 3px;
-        border-radius: 0 0 1em 1em;
+        border-radius: 0 0 .5em .5em;
+    }
+    &:only-child {
+        border-top: 3px solid $alternative-color;
+        border-radius: .5em;
     }
     small {
         color: darken($alternative-color, 20%);
@@ -148,14 +152,15 @@
                 flex: 1;
                 width: 75px;
                 text-align: center;
-                padding: 1em;
-                line-height: 1.5em;
+                padding: 1em; //line-height: 1.5em;
                 background: lighten($secondary-color, 20%);
-                border-left: 1px solid darken($secondary-color, 10%);
-                //text-shadow: 0px 1px 1px rgba(255, 255, 2555, 0.75), 0px -1px 1px rgba(0, 0, 0, .75);
+                border-left: 1px solid darken($secondary-color, 10%); //text-shadow: 0px 1px 1px rgba(255, 255, 2555, 0.75), 0px -1px 1px rgba(0, 0, 0, .75);
                 font-family: $base-font;
                 text-transform: uppercase;
                 color: darken($grey, 10%);
+                img {
+                    height: 30px;
+                }
             }
         }
         .task-action-list {

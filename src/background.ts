@@ -5,7 +5,8 @@
 
 import * as path from 'path';
 import * as url from 'url';
-import { app, Menu } from 'electron';
+import { app, Menu, ipcMain } from 'electron';
+import { autoUpdater } from 'electron-updater';
 import { devMenuTemplate } from './menu/dev_menu_template';
 import { editMenuTemplate } from './menu/edit_menu_template';
 import createWindow from './helpers/window';
@@ -30,7 +31,14 @@ var setApplicationMenu = function() {
 if (env.name !== 'production') {
     var userDataPath = app.getPath('userData');
     app.setPath('userData', userDataPath + ' (' + env.name + ')');
+
 }
+
+
+
+autoUpdater.on('update-downloaded', (info) => {
+    mainWindow.webContents.send('updateReady')
+});
 
 app.on('ready', function() {
     setApplicationMenu();
@@ -46,10 +54,16 @@ app.on('ready', function() {
         slashes: true
     }));
 
+    autoUpdater.checkForUpdates();
+
     if (env.name === 'development') {
         mainWindow.openDevTools();
     }
 });
+
+ipcMain.on("quitAndInstall", (event, arg) => {
+    autoUpdater.quitAndInstall();
+})
 
 app.on('window-all-closed', function() {
     app.quit();
