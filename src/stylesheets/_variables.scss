@@ -9,10 +9,14 @@ $h-padding : 1.5em;
 $black: #000;
 $grey: #696969;
 $white: #fff;
+$off-white: #f1f1f1;
 
-$primary-color:#D8E0DC;
-$secondary-color:#A8B5AF;
+$primary-color:#82abd8;
+$secondary-color:#465565;
 $alternative-color:#93A29B;
+
+$border-color: $secondary-color;
+$button-color: $off-white;
 
 $error-color: #d9534f;
 $success-color: #8fbc8f;

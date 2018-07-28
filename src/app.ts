@@ -9,13 +9,9 @@ const moment = moment_;
 const app = remote.app;
 const appDir = jetpack.cwd(app.getAppPath());
 
+const addEvent = document.addEventListener;
+
 console.log('The author of this app is:', appDir.read('package.json', 'json').author);
-// wait for an updateReady message
-remote.ipcMain.on('updateReady', function(event, text) {
-  // changes the text of the button
-  var container = document.getElementById('app-meta-version');
-  container.innerHTML = "new version ready!";
-})
 
 
 
@@ -25,6 +21,7 @@ module noirtime {
     filterResult: boolean = true;
     currentTask = ko.observable('');
     dragDomElm: HTMLElement = null;
+    dropDomElm: HTMLElement = null;
     time = {
       clean: 0,
       formatted: moment.utc(0).format('HH:mm:ss')
@@ -46,34 +43,15 @@ module noirtime {
 
     constructor() {
       this.setMeta();
-      this.setupData();
-      this.bindEvents();
+      this.versionCheck();
     }
-
     setMeta() {
       document.getElementById('app-meta-name').innerText = appDir.read('package.json', 'json').productName;
       document.getElementById('app-meta-description').innerText = appDir.read('package.json', 'json').description;
       document.getElementById('app-meta-version').innerText = appDir.read('package.json', 'json').version;
       document.getElementById('app-meta-copyright').innerText = appDir.read('package.json', 'json').copyright;
       document.getElementById('app-meta-web').innerText = appDir.read('package.json', 'json').homepage;
-
     }
-    update(id: string, obj: any) {
-      let taskID = 'noir.task-' + id;
-      if (obj !== null) {
-        let viewModelObj = JSON.parse(localStorage.getItem(taskID));
-        viewModelObj = obj;
-        localStorage.setItem(taskID, ko.toJSON(viewModelObj));
-      } else {
-        localStorage.removeItem(taskID);
-        let deletionObj: Number = this.viewModel.tasks().findIndex(task => task.id === id);
-        delete this.viewModel.tasks()[deletionObj];
-      }
-    }
-    getTask(id: string) {
-      return this.viewModel.tasks().find(task => task.id === id).index;
-    }
-
     setupData() {
       let tasks: Array<string> = Object.keys(localStorage);
       let taskCount: number = tasks.filter(function(key) { return key.indexOf('noir.task-item') > -1 }).length;
@@ -87,32 +65,69 @@ module noirtime {
       } else {
         this.buildTasks(false);
       }
+    }
+    versionCheck() {
+      const localVersion = localStorage.getItem('noir.version');
+      const currentVersion = appDir.read('package.json', 'json').version;
+      const versionClear = appDir.read('package.json', 'json').updateclear;
 
+      if (localVersion === null || localVersion !== currentVersion) {
+        if (versionClear === 'true') {
+          console.info('Clearing storage');
+          localStorage.clear();
+        }
+        localStorage.setItem('noir.version', currentVersion);
+      }
+      this.setupData();
+      this.bindEvents();
+    }
+    update(id: string, main: object) {
+      let taskID = 'noir.task-' + id;;
+      if (main !== null) {
+        let viewModelObj = JSON.parse(localStorage.getItem(taskID));
+        viewModelObj = main;
+        localStorage.setItem(taskID, ko.toJSON(viewModelObj));
+      } else {
+        localStorage.removeItem(taskID);
+        const index: number = this.viewModel.tasks().findIndex(task => task.id === id);
+        this.viewModel.tasks().splice(index, 1);
+      }
+    }
+    newTask(idx: string, inx: number, title: string, isSticky: boolean) {
+      return {
+        id: idx,
+        index: inx,
+        name: title,
+        sticky: isSticky,
+        child: ko.observable(false),
+        parent: {
+          id: ko.observable(''),
+          name: ko.observable('')
+        },
+        time: {
+          clean: 0,
+          formatted: moment.utc(0).format('HH:mm:ss')
+        },
+        overall: {
+          clean: 0,
+          formatted: moment.utc(0).format('HH:mm:ss')
+        },
+        observables: {
+          startBtn: ko.observable(true),
+          pauseBtn: ko.observable(false),
+          stopBtn: ko.observable(false)
+        }
+      };
+    }
 
+    getTask(id: string) {
+      return this.viewModel.tasks().find(task => task.id === id).index;
     }
     buildTasks(clear: Boolean) {
       let tasks: Array<string> = Object.keys(localStorage);
       let taskCount = tasks.filter(task => task.indexOf('noir.task-item') > -1);
       if (taskCount.length === 0) {
-        let newTask = {
-          id: 'item-1',
-          index: 1,
-          name: 'Idle',
-          sticky: true,
-          time: {
-            clean: 0,
-            formatted: moment.utc(0).format('HH:mm:ss')
-          },
-          overall: {
-            clean: 0,
-            formatted: moment.utc(0).format('HH:mm:ss')
-          },
-          observables: {
-            startBtn: ko.observable(true),
-            pauseBtn: ko.observable(false),
-            stopBtn: ko.observable(false)
-          }
-        };
+        let newTask = this.newTask('item-1', 1, 'Idle', true);
         this.viewModel.tasks.push(newTask);
         localStorage.setItem('noir.task-item-1', ko.toJSON(this.viewModel.tasks()[0]));
       } else {
@@ -125,25 +140,31 @@ module noirtime {
                 formatted: moment.utc(0).format('HH:mm:ss')
               };
             }
+            viewModelItem.child = ko.observable(viewModelItem.child);
+            viewModelItem.parent = {
+              id: ko.observable(viewModelItem.parent.id),
+              name: ko.observable(viewModelItem.parent.name),
+            }
             viewModelItem.observables = {
               startBtn: ko.observable(true),
               pauseBtn: ko.observable(false),
               stopBtn: ko.observable(false)
             }
+
             this.viewModel.tasks.push(viewModelItem);
           }
         }
       }
       ko.applyBindings(this.viewModel);
     }
-
     bindEvents() {
       const _self = this;
       let filterInput: Element = document.querySelector('.filter-tasks');
 
       filterInput.addEventListener('keyup', (e: Event) => _self.filterTasks(e));
 
-      document.addEventListener('click', (e: Event) => {
+      addEvent('click', (e: Event) => {
+        e.preventDefault();
         if ((<HTMLElement>e.target).className.indexOf('task-start') > -1 || (<HTMLElement>e.target).parentElement.className.indexOf('task-start') > -1) {
           _self.startTimer(e);
         } else if ((<HTMLElement>e.target).className.indexOf('task-pause') > -1 || (<HTMLElement>e.target).parentElement.className.indexOf('task-pause') > -1) {
@@ -159,18 +180,55 @@ module noirtime {
           _self.editTask(e);
         }
       });
-      document.addEventListener('dragover', (e: Event) => {
-        if ((<HTMLElement>e.target).className.indexOf('task-row') > -1) {
-          _self.dragOver(e);
+
+
+      addEvent('dragenter', (e: Event) => {
+        if ((<HTMLElement>e.target).className.indexOf('dropzone') > -1) {
+          (<HTMLElement>e.target).classList.add('over');
+          this.dropDomElm = (<HTMLElement>(<HTMLElement>e.target).closest('.task-row'));
+        }
+      }, false);
+
+      addEvent('dragleave', (e: Event) => {
+        (<HTMLElement>e.target).classList.remove('over');
+      }, false);
+
+      addEvent('dragstart', (e: Event) => {
+        if ((<HTMLElement>e.target).className.indexOf('draghandle') > -1) {
+          this.dragDomElm = (<HTMLElement>(<HTMLElement>e.target).closest('.task-row'));
+          this.dragDomElm.classList.add('dragging');
+          let taskRows: HTMLCollectionOf<Element> = document.getElementsByClassName('task-row');
+          Array.from(taskRows).forEach(function(element) {
+            if (element.classList.contains('dragging') === false) {
+              element.querySelector('.draghandle').classList.add('hide');
+              element.querySelector('.dropzone').classList.add('active');
+            } else {
+              element.querySelector('.dropzone').classList.add('deactive');
+            }
+
+          });
+          (<HTMLElement>e.target).style.opacity = '.2';
+          (<any>e).dataTransfer.effectAllowed = 'copy';
+          (<any>e).dataTransfer.setData('text/plain', null);
         }
       });
 
-      document.addEventListener('dragstart', (e: Event) => {
-        if ((<HTMLElement>e.target).className.indexOf('task-row') > -1) {
-          _self.dragStart(e);
-        }
-      });
+
+      addEvent('dragend', (e: Event) => {
+        let taskRows: HTMLCollectionOf<Element> = document.getElementsByClassName('task-row');
+
+        Array.from(taskRows).forEach(function(element) {
+          element.querySelector('.draghandle').classList.remove('hide');
+          element.querySelector('.dropzone').classList.remove('active', 'deactive');
+        });
+        this.dragDomElm.classList.remove('dragging');
+        this.dropDomElm.classList.remove('over');
+        this.addTaskToParent(this.dropDomElm, this.dragDomElm);
+        (<HTMLElement>e.target).style.opacity = '1';
+      }, false);
     }
+
+
 
     popDialog(title: string, message: string, callback, event: Event) {
       const _self = this;
@@ -182,31 +240,6 @@ module noirtime {
       }, function(response: number) {
         callback(event, response, _self);
       });
-    }
-
-    isBefore(el1, el2) {
-      if (el2.parentNode === el1.parentNode) {
-        for (var cur = el1.previousSibling; cur && cur.nodeType !== 9; cur = cur.previousSibling) {
-          if (cur === el2) {
-            return true;
-          }
-        }
-      }
-      return false;
-    }
-
-    dragOver(event: Event) {
-      if (this.isBefore(this.dragDomElm, (<HTMLElement>event.target))) {
-        (<HTMLElement>event.target).parentNode.insertBefore(this.dragDomElm, (<HTMLElement>event.target));
-      } else {
-        (<HTMLElement>event.target).parentNode.insertBefore(this.dragDomElm, (<HTMLElement>event.target).nextSibling);
-      }
-    }
-
-    dragStart(event: any) {
-      event.dataTransfer.effectAllowed = 'move';
-      event.dataTransfer.setData('text/plain', null);
-      this.dragDomElm = (<HTMLElement>event.target);
     }
 
     filterTasks(event: Event) {
@@ -243,44 +276,40 @@ module noirtime {
     editTask(event: Event) {
       const taskRow: Element = event.srcElement.closest('.task-row');
       let taskIndex = this.getTask(taskRow.id);
+      let viewModelMainTask = this.viewModel.tasks().find(task => task.index === taskIndex);
 
       if (taskRow.querySelector('.task-name').hasAttribute('contenteditable') === true) {
         taskRow.querySelector('.task-name').removeAttribute('contenteditable');
-        let viewModelTask = this.viewModel.tasks().find(task => task.index === taskIndex);
-        viewModelTask.name = taskRow.querySelector('.task-name').innerHTML;
-        this.update(taskRow.id, viewModelTask);
+        viewModelMainTask.name = taskRow.querySelector('.task-name').innerHTML;
+
+        this.update(taskRow.id, viewModelMainTask);
       } else {
         taskRow.querySelector('.task-name').setAttribute('contenteditable', 'true');
-        this.toggleMore(event);
+        if (taskRow.id.indexOf('sub-item') === -1) {
+          this.toggleMore(event);
+        }
       }
 
     }
     addTask() {
-      let newCount: Number = this.viewModel.count() + 1;
-      let newTaskID: Number = newCount;
-      let newTaskName: String = (<HTMLInputElement>document.querySelector('.filter-tasks')).value;
-      let taskRows: HTMLCollectionOf<Element> = document.getElementsByClassName('task-row');
-      let newTask = {
-        id: 'item-' + newTaskID,
-        name: newTaskName,
-        index: newTaskID,
-        sticky: false,
-        time: {
-          clean: 0,
-          formatted: moment.utc(0).format('HH:mm:ss')
-        },
-        overall: {
-          clean: 0,
-          formatted: moment.utc(0).format('HH:mm:ss')
-        },
-        observables: {
-          startBtn: ko.observable(true),
-          pauseBtn: ko.observable(false),
-          stopBtn: ko.observable(false)
+      const taskIdxs: Array<number> = this.viewModel.tasks().map(t => { return t.index });
+      let newTaskIndex: number = 0;
+      let isSearching: boolean = true;
+      let indexTry: number = 1;
+      while (isSearching === true) {
+        if (taskIdxs.indexOf(indexTry) === -1) {
+          isSearching = false;
+          newTaskIndex = indexTry;
+        } else {
+          indexTry++;
         }
-      };
+      }
+      let newTaskID: number = newTaskIndex;
+      let newTaskName: string = (<HTMLInputElement>document.querySelector('.filter-tasks')).value;
+      let taskRows: HTMLCollectionOf<Element> = document.getElementsByClassName('task-row');
+      let newTask = this.newTask('item-' + newTaskID, newTaskID, newTaskName, false);
 
-      this.viewModel.count(newCount);
+      this.viewModel.count(taskIdxs.length + 1);
 
       this.viewModel.tasks.push(newTask);
       localStorage.setItem('noir.task-item-' + newTaskID, ko.toJSON(newTask));
@@ -288,10 +317,20 @@ module noirtime {
       (<HTMLInputElement>document.querySelector('.filter-tasks')).value = '';
       (<HTMLInputElement>document.querySelector('.filter-tasks')).dispatchEvent(new KeyboardEvent('keyup', { 'key': 'a' }));
     }
+    addTaskToParent(parent: HTMLElement, child: HTMLElement) {
+      let childIndex: String = this.getTask(child.id);
+      let viewModelMainTask = this.viewModel.tasks().find(task => task.index === childIndex);
+      viewModelMainTask.parent.id = parent.id;
+      viewModelMainTask.parent.name = parent.querySelector('.task-name').innerHTML;
+      viewModelMainTask.child(true);
+      child.querySelector('.parent-name').innerHTML = viewModelMainTask.parent.name;
+      this.update(child.id, viewModelMainTask);
+    }
     deleteTask(event: Event, response: number, _self) {
       if (response === 0) {
         const taskRow: Element = event.srcElement.closest('.task-row');
         let taskIndex: String = _self.getTask(taskRow.id);
+        let viewModelMainTask = _self.viewModel.tasks().find(task => task.index === taskIndex);
         taskRow.remove();
         let newCount: Number = _self.viewModel.count() - 1;
         _self.viewModel.count(newCount);
@@ -304,20 +343,20 @@ module noirtime {
     stopTimer(event: Event) {
       const taskRow: Element = event.srcElement.closest('.task-row');
       let taskIndex: String = this.getTask(taskRow.id);
-      let viewModelTask = this.viewModel.tasks().find(task => task.index === taskIndex);
+      let viewModelMainTask = this.viewModel.tasks().find(task => task.index === taskIndex);
       let timerElement: Element = taskRow.querySelector('.task-time');
       clearInterval(this.interval);
 
-      viewModelTask.time = {
+      viewModelMainTask.time = {
         clean: 0,
         formatted: moment.utc(0).format('HH:mm:ss')
       };
 
-      viewModelTask.observables.startBtn(true);
-      viewModelTask.observables.stopBtn(false);
-      viewModelTask.observables.pauseBtn(false);
+      viewModelMainTask.observables.startBtn(true);
+      viewModelMainTask.observables.stopBtn(false);
+      viewModelMainTask.observables.pauseBtn(false);
 
-      this.update(taskRow.id, viewModelTask);
+      this.update(taskRow.id, viewModelMainTask);
       this.toggleMore(event);
       timerElement.innerHTML = '00:00:00';
 
@@ -326,12 +365,13 @@ module noirtime {
       let taskRows: HTMLCollectionOf<Element> = document.getElementsByClassName('task-row');
       const taskRow: Element = event.srcElement.closest('.task-row');
       let taskIndex: String = this.getTask(taskRow.id);
-      let viewModelTask = this.viewModel.tasks().find(task => task.index === taskIndex);
-      viewModelTask.observables.startBtn(true);
-      viewModelTask.observables.stopBtn(true);
-      viewModelTask.observables.pauseBtn(false);
+      let viewModelMainTask = this.viewModel.tasks().find(task => task.index === taskIndex);
+      viewModelMainTask.observables.startBtn(true);
+      viewModelMainTask.observables.stopBtn(true);
+      viewModelMainTask.observables.pauseBtn(false);
+
       this.currentTask('');
-      this.update(taskRow.id, viewModelTask);
+      this.update(taskRow.id, viewModelMainTask);
 
       clearInterval(this.interval);
       for (var i = 0; i < taskRows.length; ++i) {
@@ -344,13 +384,14 @@ module noirtime {
       const taskRow: Element = event.srcElement.closest('.task-row');
       let _self = this;
       let taskIndex: String = this.getTask(taskRow.id);
-      let viewModelTask = this.viewModel.tasks().find(task => task.index === taskIndex);
-      let timerElement = taskRow.querySelector('.task-time');
+      let viewModelMainTask = this.viewModel.tasks().find(task => task.index === taskIndex);
       let overallTimerElement = taskRow.querySelector('.task-over-time');
+      viewModelMainTask.observables.startBtn(false);
+      viewModelMainTask.observables.stopBtn(false);
+      viewModelMainTask.observables.pauseBtn(true);
 
-      viewModelTask.observables.startBtn(false);
-      viewModelTask.observables.stopBtn(false);
-      viewModelTask.observables.pauseBtn(true);
+      let timerElement = taskRow.querySelector('.task-time');
+
       this.currentTask(taskRow.id);
       clearInterval(this.interval);
       for (var i = 0; i < taskRows.length; ++i) {
@@ -362,19 +403,32 @@ module noirtime {
         }
       }
       this.interval = setInterval(function() {
-        viewModelTask.time.clean++;;
-        viewModelTask.time.formatted = moment.utc(viewModelTask.time.clean * 1000).format('HH:mm:ss');
-        viewModelTask.overall.clean++;
-        viewModelTask.overall.formatted = moment.utc(viewModelTask.overall.clean * 1000).format('HH:mm:ss');
-        _self.update(taskRow.id, viewModelTask);
-        timerElement.innerHTML = viewModelTask.time.formatted;
-        overallTimerElement.innerHTML = viewModelTask.overall.formatted;
+        viewModelMainTask.time.clean++;;
+        viewModelMainTask.time.formatted = moment.utc(viewModelMainTask.time.clean * 1000).format('HH:mm:ss');
+        viewModelMainTask.overall.clean++;
+        viewModelMainTask.overall.formatted = moment.utc(viewModelMainTask.overall.clean * 1000).format('HH:mm:ss');
+        overallTimerElement.innerHTML = viewModelMainTask.overall.formatted;
+        if (viewModelMainTask.parent.id() !== '') {
+          const taskParentIndex = _self.getTask(viewModelMainTask.parent.id());
+          const viewModelParentTask = _self.viewModel.tasks().find(task => task.index === taskParentIndex);
+          let overallTimerParentElement = document.getElementById(viewModelMainTask.parent.id()).querySelector('.task-over-time');
+          viewModelParentTask.overall.clean++;
+          viewModelParentTask.overall.formatted = moment.utc(viewModelParentTask.overall.clean * 1000).format('HH:mm:ss');
+          overallTimerParentElement.innerHTML = viewModelParentTask.overall.formatted;
+          _self.update(viewModelMainTask.parent.id(), viewModelParentTask);
+        }
+        overallTimerElement.innerHTML = viewModelMainTask.overall.formatted;
+        timerElement.innerHTML = viewModelMainTask.time.formatted;
+        _self.update(taskRow.id, viewModelMainTask);
+
+
       }, 1000);
+
     }
   }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+addEvent('DOMContentLoaded', function() {
   var application = new noirtime.Tasks();
 });
 

@@ -38,28 +38,37 @@
     .col6 {
         width: 50%;
     }
+    .col5 {
+        width: 40%;
+    }
     .col4 {
         width: 33.33%;
     }
     .col3 {
         width: 25%;
     }
+    .col2 {
+        width: 20%;
+    }
+    .col1 {
+        width: 10%;
+    }
 }
 
 .filter-row {
     padding: .5em;
-    background: $primary-color;
+    background: $off-white;
     border-radius: .5em;
-    border-top: 3px solid $alternative-color;
-    border-bottom: 3px solid $alternative-color;
-    box-shadow: -1px 0 0px rgba($alternative-color, 1), 1px 0 0px rgba($alternative-color, 1);
+    border-top: 3px solid $border-color;
+    border-bottom: 3px solid $border-color;
+    box-shadow: -1px 0 0px rgba($border-color, 1), 1px 0 0px rgba($border-color, 1);
     input[type="search"] {
         width: 100%;
         padding: 1.2em;
         line-height: 1em;
         border: 0;
         background: rgba($white, .5);
-        outline: 1px solid $alternative-color;
+        outline: 1px solid $border-color;
         &:focus {
             outline-offset: 1px;
             box-shadow: 0 0 5px rgba($info-color, .5);
@@ -68,7 +77,7 @@
 }
 
 .no-result-row {
-    background: $white;
+    background: $off-white;
     text-align: center;
     color: $error-color;
     font-family: $light-font;
@@ -79,12 +88,13 @@
 
     display: flex;
     align-items: center;
-    border-bottom: 1px solid $alternative-color;
-    box-shadow: -1px 0 0px rgba($alternative-color, 1), 1px 0 0px rgba($alternative-color, 1);
+    border-bottom: 1px solid $border-color;
+    box-shadow: -1px 0 0px rgba($border-color, 1), 1px 0 0px rgba($border-color, 1);
     overflow: hidden;
-    background: $primary-color;
+    background: $off-white;
     transition: all .3s ease;
     opacity: 1;
+    max-height: 75px;
     &.focus {
         box-shadow: 0 0 5px rgba(0, 0, 0, .5);
         z-index: 2;
@@ -99,32 +109,79 @@
         position: relative;
         padding: .5em;
     }
-    .task-name {
-        display: block;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-        transition: all .3s ease;
-        +.toggle-edit {
-            display: none;
-        }
-
-        &[contenteditable="true"] {
-            background-color: $white;
-            +.toggle-edit {
-                display: block;
-                position: absolute;
-                top: 8px;
-                right: 8px;
+    .row-titles {
+        display: flex;
+        flex-direction: column-reverse;
+        -webkit-user-select: none;
+        .parent-name {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            &:not(:empty) {
+                font-family: $light-font;
                 font-size: .85em;
-                padding: 2px 5px;
-                background: $success-color;
-                color: $white;
+            }
+        }
+        .task-name {
+            display: block;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            transition: all .3s ease;
+            +.toggle-edit {
+                display: none;
+            }
+
+            &[contenteditable="true"] {
+                background-color: $white;
+                +.toggle-edit {
+                    display: block;
+                    position: absolute;
+                    top: 7px;
+                    right: 8px;
+                    font-size: .85em;
+                    padding: 2px 5px;
+                    background: $success-color;
+                    color: $white;
+                }
             }
         }
     }
+
+    .draghandle {
+        background: url(../images/menu-circular-button.svg);
+        height: 30px;
+        width: 30px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        cursor: move;
+        z-index: 1;
+        position: relative;
+        &.hide {
+            display: none;
+        }
+    }
+    .dropzone {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        margin-top: -15px;
+        border-radius: 50%;
+        z-index: 0;
+        &.deactive {
+            display: none;
+        }
+        &.active {
+            border: 1px solid $border-color;
+            
+        }
+        &.over {
+            background: $white;
+            box-shadow: 0 0 5px rgba($border-color, .4);
+        }
+    }
     &:first-child {
-        border-top: 3px solid $alternative-color;
+        border-top: 3px solid $border-color;
         border-radius: .5em .5em 0 0;
     }
     &:last-child {
@@ -132,7 +189,7 @@
         border-radius: 0 0 .5em .5em;
     }
     &:only-child {
-        border-top: 3px solid $alternative-color;
+        border-top: 3px solid $border-color;
         border-radius: .5em;
     }
     small {
@@ -142,6 +199,10 @@
     .task-time {
         font-size: 2em;
         font-family: $light-font;
+        -webkit-user-select: none;
+    }
+    .task-over-time {
+        -webkit-user-select: none;
     }
     .task-actions {
         justify-content: flex-end;
@@ -152,12 +213,12 @@
                 flex: 1;
                 width: 75px;
                 text-align: center;
-                padding: 1em; //line-height: 1.5em;
-                background: lighten($secondary-color, 20%);
-                border-left: 1px solid darken($secondary-color, 10%); //text-shadow: 0px 1px 1px rgba(255, 255, 2555, 0.75), 0px -1px 1px rgba(0, 0, 0, .75);
+                padding: 1.2em; //line-height: 1.5em;
+                background: $button-color;
+                border-left: 1px solid $border-color; //text-shadow: 0px 1px 1px rgba(255, 255, 2555, 0.75), 0px -1px 1px rgba(0, 0, 0, .75);
                 font-family: $base-font;
                 text-transform: uppercase;
-                color: darken($grey, 10%);
+                color: $off-white;
                 img {
                     height: 30px;
                 }
@@ -165,7 +226,7 @@
         }
         .task-action-list {
             position: absolute;
-            background: #f1f1f1;
+            background: darken($off-white, 5%);
             width: 200%;
             height: 100%;
             right: -200%;
@@ -183,13 +244,13 @@
                 height: 100%;
                 width: 50%;
                 float: left;
-                border-left: 1px solid $secondary-color;
+                border-left: 1px solid $border-color;
                 li {
                     width: 100%;
                     display: flex;
                     align-items: center;
                     flex-grow: 1;
-                    border-bottom: 1px solid $secondary-color;
+                    border-bottom: 1px solid $border-color;
                     &:last-child {
                         border-color: transparent;
                     }

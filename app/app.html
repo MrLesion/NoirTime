@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    <div class="window-dragger"></div>
     <header class="text-center m-b-1 m-t-2">
         <h1 id="app-meta-name"></h1>
         <small id="app-meta-description"></small>
@@ -21,7 +22,8 @@
                 <div class="col col12">
                     <div class="row">
                         <div class="col col12 d-flex justify-space-between align-items-center m-b-1">
-                            <h2>Tasks (<span data-bind="text:count"></span>)</h2>
+                            <h2>Tasks (<span data-bind="text:count"></span>) 
+                            </h2>
                             <small data-bind="text:date"></small>
                         </div>
                     </div>
@@ -37,13 +39,20 @@
                     </div>
                     <div class="m-t-1" data-bind="template: { name: 'task-template', data: $data, foreach: tasks }"></div>
                     <script type="text/html" id="task-template">
-                        <div class="row task-row" data-bind="attr: { id: id, 'data-sort-order': index }" draggable="true">
-                            <div class="col col6">
+                        <div class="row task-row" data-bind="attr: { id: id, 'data-sort-order': index }">
+                            <div class="col col1 p-r-0">
+                                <div class="draghandle" draggable="true" data-bind="visible: sticky === false && child() === false">
+                                </div>
+                                <div class="dropzone" data-bind="visible: child() === false"></div>
+                            </div>
+                            <div class="col col5 p-l-0">
                                 <div class="inner-row">
-                                    <strong class="task-name" data-bind="text: name">Internal</strong>
-                                    <a href="#" class="toggle-edit">Save</a>
+                                    <div class="row-titles">
+                                        <strong class="parent-name" data-bind="text: parent.name"></strong>
+                                        <strong class="task-name" data-bind="text: name"></strong>
+                                        <a href="#" class="toggle-edit">Save</a>
+                                    </div>
                                     <small class="task-over-time" data-bind="text: overall.formatted"></small>
-
                                 </div>
                             </div>
                             <div class="col col3">
@@ -54,12 +63,12 @@
                             <div class="col col3 p-r-0">
                                 <div class="task-actions d-flex">
                                     <div class="task-action d-flex">
-                                        <a href="#" class="task-action-btn success-bg task-start" data-bind="visible: observables.startBtn">
+                                        <a href="#" class="task-action-btn task-start" data-bind="visible: observables.startBtn">
                                             <img src="./images/wall-clock.svg" alt="">
                                         </a>
                                     </div>
                                     <div class="task-action d-flex">
-                                        <a href="#" class="task-action-btn warning-bg task-pause" data-bind="visible: observables.pauseBtn">
+                                        <a href="#" class="task-action-btn task-pause" data-bind="visible: observables.pauseBtn">
                                             <img src="./images/round-done-button.svg" alt="">
                                         </a>
                                     </div>

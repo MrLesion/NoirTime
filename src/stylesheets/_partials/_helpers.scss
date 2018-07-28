@@ -14,8 +14,14 @@
     display: block!important;
 }
 
+.p-0 {
+    padding: 0!important;
+}
 .p-r-0 {
     padding-right: 0!important;
+}
+.p-l-0 {
+    padding-left: 0!important;
 }
 
 .m-0 {
@@ -68,7 +74,7 @@
     border-color: darken($error-color, 10%)!important;
     color: lighten($error-color, 20%)!important;
     *{
-        color: lighten($error-color, 20%)!important;
+        color: $off-white!important;
     }
 }
 

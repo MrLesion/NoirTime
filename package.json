@@ -1,8 +1,9 @@
 {
   "name": "noir-time",
-  "productName": "Noir Time",
+  "productName": "NoirTime",
   "description": "The front-end time tracking app",
-  "version": "0.1.1",
+  "version": "0.2.5",
+  "updateclear": "true",
   "author": "Mr. Lesion <lassehove@lesion.dk>",
   "copyright": "© 2018, lesion.dk",
   "homepage": "https://lesion.dk",

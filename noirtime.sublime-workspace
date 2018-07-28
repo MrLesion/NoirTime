@@ -1,0 +1,762 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"text",
+				"text-decoration"
+			],
+			[
+				"at",
+				"article\t<article>"
+			],
+			[
+				"obj",
+				"objArr"
+			],
+			[
+				"op",
+				"opacity\topacity()"
+			],
+			[
+				"background",
+				"background-color"
+			],
+			[
+				"max",
+				"max-width"
+			],
+			[
+				"mixin",
+				"mixin\t@mixin"
+			],
+			[
+				"get",
+				"getItem"
+			],
+			[
+				"local",
+				"localStorage"
+			],
+			[
+				"url",
+				"urlParam"
+			],
+			[
+				"ini",
+				"initialized"
+			],
+			[
+				"label",
+				"label\t<label>"
+			],
+			[
+				"error",
+				"errorMessage"
+			],
+			[
+				"getTra",
+				"getTranslations"
+			],
+			[
+				"tra",
+				"translations"
+			],
+			[
+				"str",
+				"strchr"
+			],
+			[
+				"master",
+				"masterClass"
+			],
+			[
+				"dump",
+				"var_dump"
+			],
+			[
+				"json",
+				"json_encode"
+			],
+			[
+				"top",
+				"top"
+			],
+			[
+				"des",
+				"destinations"
+			],
+			[
+				"pl",
+				"plugins"
+			],
+			[
+				"each",
+				"each\t.each()"
+			],
+			[
+				"lab",
+				"label\t<label> with <input>"
+			],
+			[
+				"ic",
+				"include\t@include"
+			],
+			[
+				"remove",
+				"removeClass\t.removeClass()"
+			],
+			[
+				"font",
+				"font-family"
+			],
+			[
+				"mysql_fe",
+				"mysql_fetch_assoc"
+			],
+			[
+				"box",
+				"box-shadow"
+			],
+			[
+				"rep",
+				"replace"
+			],
+			[
+				"remo",
+				"removeClass\t.removeClass()"
+			],
+			[
+				"link",
+				"link\tlink - icon"
+			],
+			[
+				"pre",
+				"prepend\t.prepend()"
+			],
+			[
+				"inl",
+				"inline-block"
+			],
+			[
+				"prepe",
+				"prependTo\t.prependTo()"
+			],
+			[
+				"out",
+				"outline"
+			],
+			[
+				"tab",
+				"tabindex"
+			],
+			[
+				"loc",
+				"localStorage"
+			],
+			[
+				"toggle",
+				"toggleClass\t.toggleClass()"
+			],
+			[
+				"min",
+				"min-height"
+			],
+			[
+				"fade",
+				"fadeOut\t.fadeOut()"
+			],
+			[
+				"posi",
+				"position"
+			],
+			[
+				"css",
+				"css\t.css() - single"
+			],
+			[
+				"of",
+				"offset\t.offset()"
+			],
+			[
+				"mar",
+				"margin-top"
+			],
+			[
+				"off",
+				"offset\t.offset()"
+			],
+			[
+				"ser",
+				"serialize\t.serialize()"
+			],
+			[
+				"anim",
+				"animate\t.animate()"
+			],
+			[
+				"repla",
+				"replaceWith\t.replaceWith()"
+			],
+			[
+				"for",
+				"for\tfor (…) {…}"
+			],
+			[
+				"ha",
+				"hasClass\t.hasClass()"
+			],
+			[
+				"app",
+				"append\t.append()"
+			],
+			[
+				"add",
+				"addClass\t.addClass()"
+			],
+			[
+				"slide",
+				"slideDown\t.slideDown()"
+			],
+			[
+				"geo",
+				"'Lucida Bright', Georgia,  serif"
+			],
+			[
+				"g",
+				"Cambria, Georgia, serif"
+			],
+			[
+				"an",
+				"animate\tanimate"
+			],
+			[
+				"print",
+				"print_r"
+			],
+			[
+				"line",
+				"line-height"
+			],
+			[
+				"z",
+				"z-index"
+			],
+			[
+				"po",
+				"position"
+			],
+			[
+				"str_r",
+				"str_replace"
+			],
+			[
+				"border-c",
+				"border-bottom-color"
+			],
+			[
+				"has",
+				"hasClass\t.hasClass"
+			],
+			[
+				"on",
+				"on\t.on()"
+			],
+			[
+				"ab",
+				"absolute"
+			],
+			[
+				"appd",
+				"appendTo\t.appendTo()"
+			],
+			[
+				"ea",
+				"each\t$.each()"
+			],
+			[
+				"eac",
+				"each\t.each()"
+			],
+			[
+				"re",
+				"relative"
+			],
+			[
+				"is",
+				"is\tis"
+			],
+			[
+				"ba",
+				"background"
+			],
+			[
+				"con",
+				"console"
+			],
+			[
+				"prop",
+				"prop\t.prop() - single"
+			],
+			[
+				"replac",
+				"str_replace"
+			],
+			[
+				"rp",
+				"replace"
+			],
+			[
+				"rpl",
+				"replaceAll\t.replaceAll"
+			],
+			[
+				"repl",
+				"str_replace"
+			],
+			[
+				"input",
+				"input\tinput - hidden"
+			],
+			[
+				"include",
+				"include\t@include"
+			],
+			[
+				"strr",
+				"str_replace"
+			],
+			[
+				"fon",
+				"font-size"
+			],
+			[
+				"ca",
+				"capitalize"
+			],
+			[
+				"tri",
+				"trigger\ttrigger"
+			],
+			[
+				"trigg",
+				"triggerHandler\ttriggerHandler"
+			],
+			[
+				"pro",
+				"prop\t.prop() - single"
+			],
+			[
+				"a",
+				"a\t<a>"
+			],
+			[
+				"project",
+				"projectpage"
+			],
+			[
+				"trigger",
+				"triggerHandler\ttriggerHandler"
+			],
+			[
+				"tr",
+				"trigger\ttrigger"
+			],
+			[
+				"includ",
+				"include\t@include"
+			],
+			[
+				"attr",
+				"attr\t.attr() - single"
+			],
+			[
+				"inc",
+				"include\t@include"
+			],
+			[
+				"margin",
+				"margin-left"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 93.0,
+		"last_filter": "Package Control: install",
+		"selected_items":
+		[
+			[
+				"Package Control: install",
+				"Package Control: Install Package"
+			],
+			[
+				"pac",
+				"Package Control: Disable Package"
+			],
+			[
+				"git",
+				"Package Control: Remove Repository"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: inst",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: rem",
+				"Package Control: Remove Package"
+			],
+			[
+				"Snippet: html",
+				"Snippet: Simple HTML5 Boilerplate"
+			],
+			[
+				"Snippet: wiind",
+				"Snippet: $.isWindow()"
+			],
+			[
+				"Package Control: insta",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: re",
+				"Package Control: Remove Package"
+			]
+		],
+		"width": 453.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"git push",
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/lassehovenielsen/Documents/Projekter/NoirTime"
+	],
+	"file_history":
+	[
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/partials/_player.html",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/dist/partials/_player.html",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/dist/css/screen.css",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/assets/scss/modules/_main.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/assets/scss/partials/_media.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/assets/scss/partials/_partials.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/assets/scss/modules/_details.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/assets/scss/partials/_icons.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/assets/scss/partials/_buttons.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/assets/scss/modules/_audioplayer.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/assets/js/main.js",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/dist/js/bundled.js",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/dist/bower_components/angular-preload-image/index.js",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/dist/partials/grid.html",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/dist/partials/details.html",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/bower_components/angular/angular.js",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/assets/scss/partials/_grid.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/dist/data/playlist.json",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/data/content.json",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/partials/details.html",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/dist/.htaccess",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/dist/img/logo.svg",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/dist/partials/_header.html",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/noirtime/sftp-config.json",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/noirtime/index.html",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/noirtime/assets/css/style.css",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/dist/data/content.json",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/dist/partials/preview.html",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/partials/grid.html",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/dist/bower_components/angular-route/angular-route.min.js",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/bower.json",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/node_modules/gulp-browserify/node_modules/browserify/index.js",
+		"/Users/lassehovenielsen/Library/Application Support/Sublime Text 3/Packages/HTML-CSS-JS Prettify/.jsbeautifyrc",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/partials/preview.html",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/gulpfile.js",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/dist/index.html",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/data/playlist.json",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/assets/scss/partials/_utils.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/index.html",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/partials/_playlist.html",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/dist/sftp-config.json",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/dist/bower_components/jquery/dist/jquery.min.js",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/dist/partials/_playlist.html",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/assets/scss/partials/_mixins.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/assets/scss/partials/_animate.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/assets/scss/vendor/_lightbox.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/assets/scss/vendor/_vendor.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/assets/scss/partials/_variables.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/assets/scss/modules/_footer.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/assets/scss/modules/_modules.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/dist/img/noir.svg",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/assets/scss/screen.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/partials/_footer.html",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/assets/scss/partials/_type.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/partials/_header.html",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/dist/partials/_footer.html",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/assets/scss/modules/_lightbox.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/dist/bower_components/angular-audio/app/index.html",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/dist/bower_components/angular/package.json",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/assets/scss/modules/_badges.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/dist/bower_components/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.min.js",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/dist/js/main.js",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/assets/js/audio.js",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/partials/_lightbox.html",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/assets/js/controllers/DetailsController.js",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/assets/js/controllers/MainController.js",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/assets/js/controllers/mainctrl.js",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/assets/scss/partials/_normalize.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/assets/scss/partials/_base.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/assets/js/bundled.js",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/package.json",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/assets/js/controllers/detailsctrl.js",
+		"/Users/lassehovenielsen/Documents/Projekter/lesion16/app/assets/js/main",
+		"/Users/lassehovenielsen/Documents/Projekter/rockstr/src/app/main/main.html",
+		"/Users/lassehovenielsen/Documents/Projekter/rockstr/src/app/main/main.controller.js",
+		"/Users/lassehovenielsen/Documents/Projekter/rockstr/src/app/index.run.js",
+		"/Users/lassehovenielsen/Documents/Projekter/rockstr/src/app/index.module.js",
+		"/Users/lassehovenielsen/Documents/Projekter/rockstr/src/app/components/topTenList/topTenLists.service.js",
+		"/Users/lassehovenielsen/Documents/Projekter/rockstr/src/app/components/navBar/navBar.service.js",
+		"/Users/lassehovenielsen/Documents/Projekter/rockstr/src/app/components/navbar/navbar.html",
+		"/Users/lassehovenielsen/Documents/Projekter/rockstr/src/app/components/navbar/navbar.directive.js",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/core/data/translations.json",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/core/data/data.json",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/core/functions/build.php",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/sftp-config.json",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/gulpfile.js",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/assets/sass/modules/_joyride.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/assets/sass/modules/_modules.scss",
+		"/Users/lassehovenielsen/Library/Application Support/Sublime Text 3/Packages/PlainTasks/messages/Tutorial.todo",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/core/wpanel/func/func.php",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/core/wpanel/func/admin.js",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/core/admin/func/config.php",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/core/functions/config.php",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/assets/sass/modules/_overlay.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/assets/sass/partials/_forms.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/core/admin/func/admin.js",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/core/admin/admin.php",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/core/admin/func/func.php",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/.jshintrc",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/dist/img/dk.svg",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/assets/sass/partials/_grid.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/core/functions/functions.php",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/assets/sass/partials/_variables.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/assets/sass/modules/_board.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/package.json",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/dist/js/script.min.js.map",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/assets/js/scripts.js",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/WORDWEB.sublime-project",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/core/data/xdata.json",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/dist/js/script.min.js",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/dist/js/script.dev.js",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/.gitignore",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/index.php",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/assets/sass/partials/_utils.scss",
+		"/Users/lassehovenielsen/Library/Application Support/Sublime Text 3/Packages/Git/Git.sublime-settings",
+		"/Users/lassehovenielsen/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/Users/lassehovenielsen/Library/Application Support/Sublime Text 3/Packages/User/Git.sublime-settings",
+		"/Users/lassehovenielsen/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/lassehovenielsen/Library/Application Support/Sublime Text 3/Packages/User/JSON.sublime-settings",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/core/admin/func/admin.css",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/assets/sass/partials/_type.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/assets/sass/partials/_base.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/assets/sass/screen.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/assets/sass/modules/_blocks.scss",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/core/admin/func/icons.css",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/assets/sass/modules/_minimap.scss",
+		"/Users/lassehovenielsen/Library/Application Support/Sublime Text 3/Packages/User/Terminal.sublime-settings",
+		"/Users/lassehovenielsen/Documents/Projekter/Wordweb 2/assets/js/vendor/annyang.js"
+	],
+	"find":
+	{
+		"height": 37.0
+	},
+	"find_in_files":
+	{
+		"height": 95.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 36.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.CSS Extended Completions":
+	{
+		"height": 0.0
+	},
+	"output.exec":
+	{
+		"height": 102.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git":
+	{
+		"height": 102.0
+	},
+	"output.mdpopups":
+	{
+		"height": 0.0
+	},
+	"output.sftp":
+	{
+		"height": 102.0
+	},
+	"pinned_build_system": "",
+	"project": "noirtime.sublime-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "lesi",
+		"selected_items":
+		[
+			[
+				"lesi",
+				"~/Documents/Projekter/Ellebæk frontend/ellebaek_frontend.sublime-project"
+			],
+			[
+				"",
+				"~/Documents/Projekter/Willanoir/willanoir.sublime-workspace"
+			],
+			[
+				"willa",
+				"~/Documents/Projekter/Wordweb 2/core/data/willanoir.sublime-project"
+			],
+			[
+				"eje",
+				"~/Documents/Projekter/Ellebæk 2014/noir-ellebaek14/ellebæk.sublime-project"
+			],
+			[
+				"esp",
+				"~/Documents/Projekter/espresso/espresso.sublime-workspace"
+			],
+			[
+				"rock",
+				"~/Documents/Projekter/Rockster/rockster.sublime-workspace"
+			],
+			[
+				"word",
+				"~/Documents/Projekter/wordweb/wordweb.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 281.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
