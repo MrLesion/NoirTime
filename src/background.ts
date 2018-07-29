@@ -6,6 +6,7 @@
 import * as path from 'path';
 import * as url from 'url';
 import { app, Menu, ipcMain } from 'electron';
+import { autoUpdater } from 'electron-updater';
 import { devMenuTemplate } from './menu/dev_menu_template';
 import { editMenuTemplate } from './menu/edit_menu_template';
 import createWindow from './helpers/window';
@@ -34,6 +35,7 @@ if (env.name !== 'production') {
 }
 
 app.on('ready', function() {
+    autoUpdater.checkForUpdatesAndNotify();
     setApplicationMenu();
 
     var mainWindow = createWindow('main', {
