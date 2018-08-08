@@ -15,6 +15,14 @@
     <header class="text-center m-b-1 m-t-2">
         <h1 id="app-meta-name"></h1>
         <small id="app-meta-description"></small>
+        <div class="tools">
+            <form>
+                <fieldset>
+                    <label for="toolToggleIdleOnStop">Toggle idle-task on stop</label>
+            <input type="checkbox" name="toolToggleIdleOnStop" id="toolToggleIdleOnStop" data-bind="checked: toolToggleIdleOnStop()">
+                </fieldset>
+            </form>
+        </div>
     </header>
     <main>
         <div class="container">
@@ -39,18 +47,18 @@
                     </div>
                     <div class="m-t-1" data-bind="template: { name: 'task-template', data: $data, foreach: tasks }"></div>
                     <script type="text/html" id="task-template">
-                        <div class="row task-row" data-bind="attr: { id: id, 'data-sort-order': index }">
-                            <div class="col col1 p-r-0">
+                        <div class="row task-row" data-bind="attr: { id: id, 'data-sort-order': sortOrder  }, css: (sticky === false && child() === false) ? 'parentable' : 'not-parentable' ">
+                            <div class="col col1-expandable p-r-0">
                                 <div class="draghandle" draggable="true" data-bind="visible: sticky === false && child() === false">
                                 </div>
                                 <div class="dropzone" data-bind="visible: child() === false"></div>
                             </div>
-                            <div class="col col5 p-l-0">
+                            <div class="col">
                                 <div class="inner-row">
                                     <div class="row-titles">
                                         <strong class="parent-name" data-bind="text: parent.name"></strong>
                                         <strong class="task-name" data-bind="text: name"></strong>
-                                        <a href="#" class="toggle-edit">Save</a>
+                                        <a href="#" class="toggle-edit" data-bind="click: $parent.clickHandler.bind($data, 'editTask')">Save</a>
                                     </div>
                                     <small class="task-over-time" data-bind="text: overall.formatted"></small>
                                 </div>
@@ -63,37 +71,33 @@
                             <div class="col col3 p-r-0">
                                 <div class="task-actions d-flex">
                                     <div class="task-action d-flex">
-                                        <a href="#" class="task-action-btn task-start" data-bind="visible: observables.startBtn">
+                                        <a href="#" class="" data-bind="attr: {class:( observables.startBtn() === false ? 'task-action-btn task-stop' : 'task-action-btn task-start')}, click: (observables.startBtn() === false ? $parent.clickHandler.bind($data, 'stopTimer') : $parent.clickHandler.bind($data, 'startTimer'))">
                                             <img src="./images/wall-clock.svg" alt="">
                                         </a>
                                     </div>
+    
                                     <div class="task-action d-flex">
-                                        <a href="#" class="task-action-btn task-pause" data-bind="visible: observables.pauseBtn">
-                                            <img src="./images/round-done-button.svg" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="task-action d-flex">
-                                        <a href="#" class="task-action-btn toggle-more">
+                                        <a href="#" class="task-action-btn toggle-more" data-bind="click: $parent.clickHandler.bind($data, 'toggleMore')">
                                             <img src="./images/round-left-button.svg" alt="">
                                         </a>
                                         <div class="task-action-list">
                                             <ul>
                                                 <li class="error-bg" data-bind="visible: sticky === false">
-                                                    <a href="#" class=" task-delete">Delete</a>
+                                                    <a href="#" class=" task-delete" data-bind="click: $parent.clickHandler.bind($data, 'deleteDialog')" >Delete</a>
                                                 </li>
                                                 <li class="info-bg" data-bind="visible: sticky === true">
                                                     <a>Sticky</a>
                                                 </li>
                                                 <li data-bind="visible: observables.stopBtn">
-                                                    <a href="#" class="task-stop">Reset</a>
+                                                    <a href="#" class="task-reset" data-bind="click: $parent.clickHandler.bind($data, 'resetTimer')">Reset</a>
                                                 </li>
                                             </ul>
                                             <ul>
                                                 <li>
-                                                    <a href="#" class="toggle-edit">Edit</a>
+                                                    <a href="#" class="toggle-edit" data-bind="click: $parent.clickHandler.bind($data, 'editTask')">Edit</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#" class="toggle-more">Close</a>
+                                                    <a href="#" class="toggle-more" data-bind="click: $parent.clickHandler.bind($data, 'toggleMore')">Close</a>
                                                 </li>
                                             </ul>
                                         </div>

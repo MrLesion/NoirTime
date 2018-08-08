@@ -5,8 +5,7 @@
 
 import * as path from 'path';
 import * as url from 'url';
-import { app, Menu, ipcMain } from 'electron';
-import { autoUpdater } from 'electron-updater';
+import { app, Menu, ipcMain, globalShortcut } from 'electron';
 import { devMenuTemplate } from './menu/dev_menu_template';
 import { editMenuTemplate } from './menu/edit_menu_template';
 import createWindow from './helpers/window';
@@ -17,7 +16,7 @@ import env from './env';
 
 var mainWindow;
 
-var setApplicationMenu = function() {
+var setApplicationMenu = () => {
     var menus: any[] = [editMenuTemplate];
     if (env.name !== 'production') {
         menus.push(devMenuTemplate);
@@ -34,8 +33,7 @@ if (env.name !== 'production') {
 
 }
 
-app.on('ready', function() {
-    autoUpdater.checkForUpdatesAndNotify();
+app.on('ready', () => {
     setApplicationMenu();
 
     var mainWindow = createWindow('main', {
@@ -53,8 +51,20 @@ app.on('ready', function() {
     if (env.name === 'development') {
         mainWindow.openDevTools();
     }
+    globalShortcut.register('CommandOrControl+1', () => {
+        mainWindow.webContents.send('shortcut-stop');
+        mainWindow.webContents.focus();
+    });
+    globalShortcut.register('CommandOrControl+2', () => {
+        mainWindow.webContents.send('shortcut-start');
+        mainWindow.webContents.focus();
+    });
 });
 
-app.on('window-all-closed', function() {
+app.on('will-quit', () => {
+    globalShortcut.unregisterAll()
+})
+
+app.on('window-all-closed', () => {
     app.quit();
 });

@@ -38,6 +38,24 @@ body {
     }
 }
 
+@keyframes spin {
+    100% { 
+        transform:rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba($grey, .5);
+  }
+  70% {
+      box-shadow: 0 0 0 10px rgba($grey, 0);
+  }
+  100% {
+      box-shadow: 0 0 0 0 rgba($grey, 0);
+  }
+}
+
 @keyframes grain {
     0%,
     100% {
